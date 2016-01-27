@@ -4,12 +4,14 @@ import org.newdawn.slick.BasicGame;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
+import advengine.module.effect.Fade;
 import advengine.sequence.Sequence;
 import advengine.sequence.Splash;
 
 public class GameParent extends BasicGame {
 
-	Sequence seq;
+	Sequence	seq;
+	Fade		fade;
 
 	public GameParent( String title ) {
 		super( title );
@@ -18,25 +20,29 @@ public class GameParent extends BasicGame {
 	@Override
 	public void init( GameContainer gc ) throws SlickException {
 		seq = new Splash();
+		fade = new Fade();
+		fade.in();
 	}
 
 	@Override
 	public void update( GameContainer gc, int delta ) throws SlickException {
-		if( !seq.update( gc, delta ) ) {
-			Class<? extends Sequence> next = seq.next( gc );
 
-			if( next == null ) {
-				gc.exit();
-				return;
-			}
+		if( !fade.isFinished() ) {
+			fade.update( gc, delta );
 
-			try {
-				seq = next.newInstance();
+			if( fade.isFinished() ) {
+				if( fade.getPrev() == Fade.State.fadeout ) {
+					if( !switchSeaquence() ) {
+						gc.exit();
+						return;
+					}
+					fade.in();
+				}
 			}
-			catch( InstantiationException | IllegalAccessException e ) {
-				e.printStackTrace();
-				gc.exit();
-				return;
+		}
+		else {
+			if( !seq.update( gc, delta ) ) {
+				fade.out();
 			}
 		}
 	}
@@ -44,5 +50,24 @@ public class GameParent extends BasicGame {
 	@Override
 	public void render( GameContainer gc, Graphics g ) throws SlickException {
 		seq.render( gc, g );
+		if( !fade.isFinished() )
+			fade.render( gc, g );
+	}
+
+	private boolean switchSeaquence() throws SlickException {
+		Class<? extends Sequence> next = seq.next();
+
+		if( next == null )
+			return false;
+
+		try {
+			seq = next.newInstance();
+		}
+		catch( InstantiationException | IllegalAccessException e ) {
+			e.printStackTrace();
+			return false;
+		}
+
+		return true;
 	}
 }

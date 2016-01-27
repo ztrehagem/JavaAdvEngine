@@ -12,7 +12,7 @@ public interface Sequence {
 	 * @return このシーケンスの次に実行するシーケンスのクラスを返します。nullでゲームを終了します。
 	 * @throws SlickException
 	 */
-	public Class<? extends Sequence> next( GameContainer gc ) throws SlickException;
+	public Class<? extends Sequence> next() throws SlickException;
 
 	/**
 	 * @return 現在のシーケンスを続ける場合はtrueを返します。falseでシーケンスを終了し、次のシーケンスに移行します

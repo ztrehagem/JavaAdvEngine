@@ -1,9 +1,11 @@
 package advengine.sequence;
 
+import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
+import advengine.meta.App;
 
 public class Splash implements Sequence {
 
@@ -12,7 +14,7 @@ public class Splash implements Sequence {
 	}
 
 	@Override
-	public Class<? extends Sequence> next( GameContainer gc ) throws SlickException {
+	public Class<? extends Sequence> next() throws SlickException {
 		return Title.class;
 	}
 
@@ -26,7 +28,11 @@ public class Splash implements Sequence {
 
 	@Override
 	public void render( GameContainer gc, Graphics g ) throws SlickException {
-		g.drawString( "Sequence::Splash", 10, 30 );
+		g.setColor( Color.white );
+		g.fillRect( 0, 0, App.width, App.height );
+
+		g.setColor( Color.black );
 		g.drawRect( 120, 120, 100, 100 );
+		g.drawString( "Sequence::Splash", 10, 30 );
 	}
 }
