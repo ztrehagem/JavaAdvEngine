@@ -14,7 +14,7 @@ public class Title implements Sequence {
 	}
 
 	@Override
-	public Class<? extends Sequence> next() throws SlickException {
+	public Sequence next() throws SlickException {
 		return null;
 	}
 

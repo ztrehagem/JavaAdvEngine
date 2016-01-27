@@ -14,8 +14,8 @@ public class Splash implements Sequence {
 	}
 
 	@Override
-	public Class<? extends Sequence> next() throws SlickException {
-		return Title.class;
+	public Sequence next() throws SlickException {
+		return new Title();
 	}
 
 	@Override

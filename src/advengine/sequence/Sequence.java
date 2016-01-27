@@ -9,10 +9,10 @@ public interface Sequence {
 	public void init( GameContainer gc ) throws SlickException;
 
 	/**
-	 * @return このシーケンスの次に実行するシーケンスのクラスを返します。nullでゲームを終了します。
+	 * @return このシーケンスの次に実行するシーケンスの情報を返します。nullでゲームを終了します。
 	 * @throws SlickException
 	 */
-	public Class<? extends Sequence> next() throws SlickException;
+	public Sequence next() throws SlickException;
 
 	/**
 	 * @return 現在のシーケンスを続ける場合はtrueを返します。falseでシーケンスを終了し、次のシーケンスに移行します

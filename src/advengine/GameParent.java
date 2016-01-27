@@ -20,6 +20,7 @@ public class GameParent extends BasicGame {
 	@Override
 	public void init( GameContainer gc ) throws SlickException {
 		seq = new Splash();
+		seq.init( gc );
 		fade = new Fade();
 		fade.in();
 	}
@@ -30,14 +31,11 @@ public class GameParent extends BasicGame {
 		if( !fade.isFinished() ) {
 			fade.update( gc, delta );
 
-			if( fade.isFinished() ) {
-				if( fade.getPrev() == Fade.State.fadeout ) {
-					if( !switchSeaquence() ) {
-						gc.exit();
-						return;
-					}
-					fade.in();
-				}
+			if( fade.isFinished() && fade.getPrev() == Fade.State.fadeout ) {
+				if( (seq = seq.next()) == null )
+					gc.exit();
+				seq.init( gc );
+				fade.in();
 			}
 		}
 		else {
@@ -49,25 +47,9 @@ public class GameParent extends BasicGame {
 
 	@Override
 	public void render( GameContainer gc, Graphics g ) throws SlickException {
-		seq.render( gc, g );
+		if( seq != null )
+			seq.render( gc, g );
 		if( !fade.isFinished() )
 			fade.render( gc, g );
-	}
-
-	private boolean switchSeaquence() throws SlickException {
-		Class<? extends Sequence> next = seq.next();
-
-		if( next == null )
-			return false;
-
-		try {
-			seq = next.newInstance();
-		}
-		catch( InstantiationException | IllegalAccessException e ) {
-			e.printStackTrace();
-			return false;
-		}
-
-		return true;
 	}
 }
