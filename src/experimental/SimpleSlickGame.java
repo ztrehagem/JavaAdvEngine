@@ -8,9 +8,9 @@ import org.newdawn.slick.SlickException;
 
 public class SimpleSlickGame extends BasicGame {
 
-	float				x		= 304;
-	float				y		= 184;
-	static final float	SPEED	= 0.1f;
+	float x = 304;
+	float y = 184;
+	static final float SPEED = 0.1f;
 
 	public SimpleSlickGame( String title ) {
 		super( title );

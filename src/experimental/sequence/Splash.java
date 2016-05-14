@@ -27,6 +27,5 @@ public class Splash implements Sequence {
 	@Override
 	public void render( GameContainer gc, Graphics g ) throws SlickException {
 		g.drawString( "Sequence::Splash", 10, 30 );
-		g.drawRect( 120, 120, 100, 100 );
 	}
 }
