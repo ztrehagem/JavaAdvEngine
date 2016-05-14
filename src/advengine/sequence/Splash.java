@@ -5,7 +5,6 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
-import advengine.meta.App;
 
 public class Splash implements Sequence {
 
@@ -29,7 +28,6 @@ public class Splash implements Sequence {
 	@Override
 	public void render( GameContainer gc, Graphics g ) throws SlickException {
 		g.setColor( Color.white );
-		g.fillRect( 0, 0, App.width, App.height );
 
 		g.setColor( Color.black );
 		g.drawRect( 120, 120, 100, 100 );

@@ -1,4 +1,4 @@
-package advengine.container;
+package advengine.struct;
 
 public class Vector2<T> {
 

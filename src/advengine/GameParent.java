@@ -1,6 +1,7 @@
 package advengine;
 
 import org.newdawn.slick.BasicGame;
+import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
@@ -49,6 +50,7 @@ public class GameParent extends BasicGame {
 
 	@Override
 	public void render( GameContainer gc, Graphics g ) throws SlickException {
+		g.setBackground( Color.white );
 		if( seq != null )
 			seq.render( gc, g );
 		if( !fade.isFinished() )

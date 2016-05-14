@@ -1,7 +1,7 @@
 package advengine.meta;
 
 import java.io.IOException;
-import advengine.container.Vector2;
+import advengine.struct.Vector2;
 
 public class Config {
 
