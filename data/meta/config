@@ -1,0 +1,23 @@
+window_pos
+0 300
+
+font_size
+10
+
+name_pos
+70 310
+
+face_pos
+70 342
+
+text_pos
+170 342
+
+text_width
+450
+
+text_rowsize
+3
+
+line_height
+25
