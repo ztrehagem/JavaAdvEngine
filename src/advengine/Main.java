@@ -7,18 +7,28 @@ import advengine.meta.Config;
 
 public class Main {
 
-	public Main() {
+	private static AppGameContainer game;
+
+	public static void start() {
+
+		if( game != null ) {
+			return;
+		}
+
 		App.load();
 		Config.load();
 
 		try {
-			AppGameContainer app = new AppGameContainer( new GameParent( App.title ) );
-			app.setDisplayMode( App.width, App.height, false );
-			app.setVSync( true );
-			app.start();
+			game = new AppGameContainer( new GameParent( App.title ) );
+			game.setDisplayMode( App.width, App.height, false );
+			game.setVSync( true );
+			game.start();
 		}
 		catch( SlickException e ) {
 
 		}
+	}
+
+	private Main() {
 	}
 }

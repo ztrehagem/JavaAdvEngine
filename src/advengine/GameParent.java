@@ -10,8 +10,8 @@ import advengine.sequence.Splash;
 
 public class GameParent extends BasicGame {
 
-	Sequence	seq;
-	Fade		fade;
+	Sequence seq;
+	Fade fade;
 
 	public GameParent( String title ) {
 		super( title );
@@ -32,8 +32,10 @@ public class GameParent extends BasicGame {
 			fade.update( gc, delta );
 
 			if( fade.isFinished() && fade.getPrev() == Fade.State.fadeout ) {
-				if( (seq = seq.next()) == null )
+				if( (seq = seq.next()) == null ) {
 					gc.exit();
+					return;
+				}
 				seq.init( gc );
 				fade.in();
 			}
