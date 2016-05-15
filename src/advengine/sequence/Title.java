@@ -8,6 +8,7 @@ import org.newdawn.slick.SlickException;
 import advengine.meta.App;
 import advengine.struct.Point;
 import advengine.struct.Rect;
+import advengine.system.Font;
 import javafx.util.Pair;
 
 public class Title implements Sequence {
@@ -21,8 +22,8 @@ public class Title implements Sequence {
 	@Override
 	public void init( GameContainer gc ) throws SlickException {
 		menus = new Menu[2];
-		menus[0] = new Menu( new Rect( (App.width - MENU_WIDTH) / 2, App.height - 4 * MENU_HEIGHT, MENU_WIDTH, MENU_HEIGHT ) );
-		menus[1] = new Menu( new Rect( (App.width - MENU_WIDTH) / 2, App.height - 2 * MENU_HEIGHT, MENU_WIDTH, MENU_HEIGHT ) );
+		menus[0] = new Menu( "スタート", new Rect( (App.width - MENU_WIDTH) / 2, App.height - 4 * MENU_HEIGHT, MENU_WIDTH, MENU_HEIGHT ) );
+		menus[1] = new Menu( "おわる", new Rect( (App.width - MENU_WIDTH) / 2, App.height - 2 * MENU_HEIGHT, MENU_WIDTH, MENU_HEIGHT ) );
 	}
 
 	@Override
@@ -67,11 +68,17 @@ public class Title implements Sequence {
 
 		Rect area;
 		Pair<Point, Point> points;
+		Point center;
+		String name;
+		Point nameDrawPoint;
 		boolean onMouse;
 
-		Menu( Rect area ) {
+		Menu( String name, Rect area ) {
 			this.area = area;
 			points = area.get();
+			center = new Point( (points.getKey().getX() + points.getValue().getX()) / 2, (points.getKey().getY() + points.getValue().getY()) / 2 );
+			this.nameDrawPoint = new Point();
+			this.setName( name );
 		}
 
 		boolean isOnMouse() {
@@ -82,8 +89,21 @@ public class Title implements Sequence {
 			this.onMouse = onMouse;
 		}
 
+		String getName() {
+			return name;
+		}
+
+		void setName( String name ) {
+			this.name = name;
+			this.nameDrawPoint.set( center.getX() - Font.getFont().getWidth( name ) / 2, center.getY() - Font.getFont().getHeight( name ) / 2 );
+		}
+
 		void draw( Graphics g ) {
+			Color c = g.getColor();
 			g.fillRect( points.getKey().getX(), points.getKey().getY(), points.getValue().getX() - points.getKey().getX(), points.getValue().getY() - points.getKey().getY() );
+			g.setColor( Color.white );
+			g.drawString( this.name, nameDrawPoint.getX(), nameDrawPoint.getY() );
+			g.setColor( c );
 		}
 
 	}

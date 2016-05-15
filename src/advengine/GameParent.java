@@ -8,6 +8,7 @@ import org.newdawn.slick.SlickException;
 import advengine.module.effect.Fade;
 import advengine.sequence.Sequence;
 import advengine.sequence.Splash;
+import advengine.system.Font;
 
 public class GameParent extends BasicGame {
 
@@ -50,6 +51,7 @@ public class GameParent extends BasicGame {
 
 	@Override
 	public void render( GameContainer gc, Graphics g ) throws SlickException {
+		g.setFont( Font.getFont() );
 		g.setBackground( Color.white );
 		if( seq != null )
 			seq.render( gc, g );
